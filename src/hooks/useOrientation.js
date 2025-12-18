@@ -5,10 +5,28 @@ import * as ScreenOrientation from 'expo-screen-orientation';
 export function useOrientation() {
   const [orientationLocked, setOrientationLocked] = useState(false);
   const [lockedOrientation, setLockedOrientation] = useState(null);
+  const [orientation, setOrientation] = useState(ScreenOrientation.Orientation.PORTRAIT_UP);
   const { width, height } = useWindowDimensions();
 
-  const currentOrientation = width > height;
-  const isLandscape = orientationLocked ? lockedOrientation : currentOrientation;
+  // Initial check and listener
+  useState(() => {
+    const checkOrientation = async () => {
+      const current = await ScreenOrientation.getOrientationAsync();
+      setOrientation(current);
+    };
+    checkOrientation();
+
+    const subscription = ScreenOrientation.addOrientationChangeListener(evt => {
+      setOrientation(evt.orientationInfo.orientation);
+    });
+
+    return () => {
+      ScreenOrientation.removeOrientationChangeListener(subscription);
+    };
+  }, []);
+
+  const currentIsLandscape = width > height;
+  const isLandscape = orientationLocked ? lockedOrientation : currentIsLandscape; // simplified check
 
   const toggleOrientationLock = async () => {
     if (orientationLocked) {
@@ -18,7 +36,7 @@ export function useOrientation() {
       setLockedOrientation(null);
     } else {
       // Bloquear en la orientación actual
-      if (currentOrientation) {
+      if (currentIsLandscape) {
         // Landscape
         await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
       } else {
@@ -26,12 +44,13 @@ export function useOrientation() {
         await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT);
       }
       setOrientationLocked(true);
-      setLockedOrientation(currentOrientation);
+      setLockedOrientation(currentIsLandscape);
     }
   };
 
   return {
     isLandscape,
+    orientation,
     orientationLocked,
     toggleOrientationLock
   };

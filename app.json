@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "red-leveler",
+    "name": "Red Leveler",
     "slug": "red-leveler",
     "version": "1.0.0",
     "orientation": "default",
@@ -20,10 +20,17 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.redwarewolf.redleveler",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "186c8967-e2a6-4e82-9e5f-017625dd0c4c"
+      }
     }
   }
 }

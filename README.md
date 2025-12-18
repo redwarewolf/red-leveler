@@ -43,6 +43,11 @@ The silver lining? At least the app works, and there are still no ads!
   - Neon green LCD-style display
   - Dark theme optimized for any lighting condition
 
+- **Pro Controls**
+  - **Calibration**: Set the current angle as 0° (because sometimes the floor is wrong, not you)
+  - **Target Mode**: Define custom target angles. Want 45°? We got you.
+  - **Reset**: Instantly clear your lies (I mean, calibration)
+
 ## 🛠️ Tech Stack
 
 - **React Native** with **Expo** SDK 54
@@ -57,10 +62,12 @@ red-leveler/
 ├── App.js                          # Main app orchestrator
 ├── src/
 │   ├── components/                 # UI Components
+│   │   ├── ControlPanel.js        # Main controls & Lock logic
+│   │   ├── Header.js              # Branding & "Secret" button
+│   │   ├── InfoPanel.js           # LED + angle display
 │   │   ├── LevelCircle.js         # Circular bubble level
 │   │   ├── LinearLevel.js         # Linear bubble level
-│   │   ├── InfoPanel.js           # LED + angle display
-│   │   └── OrientationLockButton.js # Custom lock icon
+│   │   └── TargetModal.js         # Target angle settings
 │   ├── hooks/                      # Custom React Hooks
 │   │   ├── useAccelerometer.js    # Sensor data processing
 │   │   ├── useOrientation.js      # Orientation management
@@ -234,12 +241,13 @@ Contributions are welcome! Whether it's:
 ### Actual Features
 - [ ] Haptic feedback when level is reached
 - [ ] Make a frontend developer not cry when reading the code
-- [ ] Calibration/zero-point adjustment
+- [x] Calibration/zero-point adjustment
 - [ ] Stop Googling "what's a div" 
 - [ ] Adjustable sensitivity thresholds
 - [ ] Angle measurement mode (not just level detection)
 - [ ] Dark/light theme toggle
 - [ ] Add the blackjack from the original plan
+- [x] Added a secret easter egg (that definitely doesn't exist)
 - [ ] Write a silly story in LinkedIn how I'm a true full-stack developer
 
 ### Non-Negotiables
@@ -269,5 +277,5 @@ Project Link: [https://github.com/redwarewolf/red-leveler](https://github.com/re
 
 *"I love it! It's wonderful"* - My Mom.
 
-*"I came for the level, I stayed for the lack of ads"* - Anonymous User, probably
+*"I came for the level, I stayed for blackjack"* - Anonymous User, probably
 
